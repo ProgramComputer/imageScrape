@@ -30,3 +30,10 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+   
+   
+   - name: upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: homework
+          path: math-homework.txt
