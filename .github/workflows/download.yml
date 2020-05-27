@@ -1,0 +1,18 @@
+name: Share data between jobs
+
+on: [push]
+jobs:
+  job_3:
+    name: Display results
+    needs: job_2
+    runs-on: macOS-latest
+    steps:
+      - name: Download math result for job 2
+        uses: actions/download-artifact@v1
+        with:
+          name: homework
+     # - name: Print the final result
+       # shell: bash
+       # run: |
+          value=`cat homework/math-homework.txt`
+          echo The result is $value
