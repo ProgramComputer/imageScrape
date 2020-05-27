@@ -1,5 +1,4 @@
-name: Share data between jobs
-
+name: Download
 on: [push]
 jobs:
   job_3:
@@ -14,5 +13,5 @@ jobs:
      # - name: Print the final result
        # shell: bash
        # run: |
-          value=`cat homework/math-homework.txt`
-          echo The result is $value
+          #value=`cat homework/math-homework.txt`
+         # echo The result is $value
