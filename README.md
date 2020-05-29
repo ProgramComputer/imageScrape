@@ -1,1 +1,1 @@
-# jpgScrapeZip
+# imageScrape
