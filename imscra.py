@@ -12,7 +12,7 @@ import zipfile
 import argparse
 import os
 
-parser = argparse.ArgumentParser(description='Scrape images', help = "check the 'extract' folder for images.")
+parser = argparse.ArgumentParser(description='Scrape images')
 parser.add_argument('url', metavar='N', type=String, nargs='+', type=str,
                     help='The url to scrape',required=True)
 parser.add_argument('path', nargs=1,
