@@ -13,24 +13,29 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser(description='Scrape images')
-parser.add_argument('url', metavar='N', type=String, nargs='+', type=str,
+parser.add_argument('url', nargs='+', 
                     help='The url to scrape',required=True)
+ parser.add_argument('tag', nargs='+', 
+                    help="name of the tag that is the parent of the <img> tag default is 'div'",default = 'div')
+parser.add_argument('classs' , nargs='+', 
+                    help='the class of the tag that is the parent of the <img> tag default is none',default = '')
 parser.add_argument('path', nargs=1,
-                 default='C:\Downloads',type=str,
+                 default='C:\Downloads',
                     help='the path to where the files will download default is C:\Downloads')
-parser.add_argument('-i', nargs = ?, default= '.jpg',type=str,help = 'image type the default is .jpg')
-parser.add_argument('attribute',nargs = '?',type=str, default = 'data-src', help='the attribute to be scraped default is data-src')
-parser.add_argument('-x', nargs=2, default='1',dest=, type=int, help= "must contain two arguments to download multiple images. Find the numerical variable and insert '{x}' in url to allow this")
-parser.add_argument('-s', nargs=?, default='1',type=int, help= "increment of the sequence")
+parser.add_argument('-i', dest='type', nargs = ?, default= '.jpg',help = 'image type the default is .jpg')
+parser.add_argument('attribute',nargs = '?', default = 'data-src', help='the attribute to be scraped default is data-src')
+parser.add_argument('-x', nargs=2, dest='ends', default='1',dest=, type=int, help= "must contain two arguments to download multiple images. Find the numerical variable and insert '{x}' in url to allow this")
+parser.add_argument('-s', nargs=?, dest='step',default='1',type=int, help= "increment of the sequence")
 
 args = parser.parse_args()
 url = args.url
-type_ = args.-i
-if "{'x}" in url:
-    args.-x[0]=1
-    args.-x[1]=1
+type_ = args.type
+attribute = args.attribute
+if "{x}" in url:
+    args.ends[0]=1
+    args.ends[1]=1
 
-for x in range(args.-x[0], args.-x[1],args.-s):
+for x in range(args.ends[0], args.ends[1],args.step):
     #define the name of the directory to be created
     path = f"{args.path}//extract/{x}"
     try:
@@ -64,13 +69,13 @@ for x in range(args.-x[0], args.-x[1],args.-s):
 
     soup = BeautifulSoup(response, "html.parser")
 
-    aas = soup.find_all("div", class_='page-break no-gaps') #find_all()
+    aas = soup.find_all(args.tag, class_= args.classs) #find_all()
 
     image_info = []
 
     for a in aas:
         image_tag = a.findChildren("img")
-        image_info.append(image_tag[0]["data-src"])#, image_tag[0]["alt"])
+        image_info.append(image_tag[0][f"{attribute}"])#, image_tag[0]["alt"])
     for i in range(0, len(image_info)):
         download_image(image_info[i],i) 
     
